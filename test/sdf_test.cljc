@@ -3,4 +3,4 @@
             [sdf]))
 (deftest namespace-loads
   (testing "the restored CLJC namespace loads"
-    (is (some? sdf))))
+    (is (some? (find-ns 'sdf)))))
