@@ -6,7 +6,7 @@
 
 (deftest namespace-loads
   (testing "the restored CLJC namespace loads"
-    (is (some? (the-ns 'sdf)))))
+    (is (some? (find-ns 'sdf)))))
 
 (deftest sphere-sdf
   (let [s {:type :sphere :radius 1.0}]

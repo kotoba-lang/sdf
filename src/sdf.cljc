@@ -22,7 +22,8 @@
   cheap 3x3 cofactor inverse. `SdfPrimitive`/`SdfNode` enums -> plain maps tagged with
   a `:type` keyword; `def foo-types #{...}` sets document valid tags. Rotation
   (`rot` degrees, XYZ Euler) is parsed but exercised by none of the original test
-  suite; the convention chosen here is R = Rz * Ry * Rx (extrinsic X then Y then Z).")
+  suite; the convention chosen here is R = Rz * Ry * Rx (extrinsic X then Y then Z)."
+  (:require [clojure.string :as str]))
 
 ;; ── portable host-math shims ─────────────────────────────────────────────────
 
@@ -411,12 +412,12 @@
     [(double (nth arr 0 0.0)) (double (nth arr 1 0.0)) (double (nth arr 2 0.0))]))
 
 (defn- parse-color-str [s]
-  (if (and (clojure.string/starts-with? s "#") (>= (count s) 7))
+  (if (and (str/starts-with? s "#") (>= (count s) 7))
     [(/ (parse-hex-byte* (subs s 1 3)) 255.0)
      (/ (parse-hex-byte* (subs s 3 5)) 255.0)
      (/ (parse-hex-byte* (subs s 5 7)) 255.0)
      1.0]
-    (case (clojure.string/lower-case s)
+    (case (str/lower-case s)
       "white" [1.0 1.0 1.0 1.0]
       "black" [0.0 0.0 0.0 1.0]
       "red" [1.0 0.0 0.0 1.0]
